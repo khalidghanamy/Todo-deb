@@ -29,11 +29,7 @@ const CheckStatus = () => {
     useEffect(() => {
         setFilteredTasks(CheckStatus());
     }
-   ,[tasks.length,updateList] );
-
-console.log(updateList);
- 
-
+   ,[tasks.length,updateList] ); 
     return ( 
         <>
             <Card className="p-0 m-5 w-100 h-100">
@@ -41,38 +37,20 @@ console.log(updateList);
                     <Card.Title className="d-flex justify-content-center"> {taskStatus} </Card.Title>
                 </Card.Header>
             <Card.Body>
-                <DragDropContext onDragEnd={onDragEnd} >
-                    <Droppable droppableId={taskStatus}>
+            <Droppable droppableId={taskStatus}>
 
 
           { (provided)=>(
             <div ref={provided.innerRef} {...provided.droppableProps} {...provided.dragHandleProps} >
           {filteredTasks.map((task,index) => (
-            <Draggable key={task.id} draggableId={task.id.toString()} index={index} >
-                {(provided) => (
-                    <div ref={provided.innerRef}
-                     {...provided.draggableProps} 
-                     {...provided.dragHandleProps}
-
-                    key={task.id}>
                     
-                
+                <Task key={task.id} task={task} setUpdateList={setUpdateList} index={index} />
             
-                <Task key={taskStatus} task={task} setUpdateList={setUpdateList} />
-
-            
-            </div>
-
-            )}
-
-
-            </Draggable>
                 ))}
                 {provided.placeholder}
                 </div>
                 )}
                     </Droppable>
-                </DragDropContext>
             </Card.Body>
                 </Card>
         

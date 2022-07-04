@@ -17,7 +17,7 @@ const Login = () => {
 
     useEffect(()=>{
         if(localStorage.getItem("task-user")){
-            navigate("/home")
+            navigate("/")
         }
     },[])
     //============== toast handler ===============
@@ -38,12 +38,13 @@ const Login = () => {
         
 
     const data= await login(values);
-            console.log(data);
            if(data.status===false){
            toast.error(data.msg,toastOption)}
            if(data.status===true){
+            console.log(data.user);
                localStorage.setItem("task-user",JSON.stringify(data.user))
-                  navigate("/home")
+               localStorage.setItem("token",JSON.stringify(data.token))
+                  navigate("/")
             }
         }
     }
